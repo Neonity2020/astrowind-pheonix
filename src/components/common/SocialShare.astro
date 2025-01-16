@@ -62,4 +62,46 @@ const { text, url, class: className = 'inline-block' } = Astro.props;
       class="w-6 h-6 text-gray-400 dark:text-slate-500 hover:text-black dark:hover:text-slate-300"
     />
   </button>
+  <button
+    class="ml-2 rtl:ml-0 rtl:mr-2"
+    title="RedNote Share"
+    data-aw-social-share="rednote"
+    data-aw-url={url}
+    data-aw-text={text}
+  >
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      class="w-6 h-6 text-gray-400 dark:text-slate-500 hover:text-black dark:hover:text-slate-300"
+    >
+      <path 
+        fill="currentColor" 
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.41 14.54c-.86.54-1.92.77-3.05.67-1.02-.09-2.02-.5-2.91-1.2-.97-.76-1.67-1.82-2.09-2.99-.42-1.17-.5-2.4-.24-3.61.26-1.21.87-2.31 1.81-3.13.94-.82 2.09-1.33 3.34-1.47 1.25-.14 2.51.14 3.61.79.94.56 1.67 1.43 2.09 2.44.42 1.01.54 2.12.35 3.19-.19 1.07-.68 2.05-1.43 2.81-.75.76-1.73 1.25-2.78 1.41-.42.06-.84.06-1.25 0 .42-.42.79-.89 1.09-1.4.3-.51.52-1.06.65-1.64.13-.58.15-1.17.06-1.75-.09-.58-.3-1.13-.63-1.61-.33-.48-.77-.87-1.28-1.14-.51-.27-1.08-.41-1.66-.41-.58 0-1.15.14-1.66.41-.51.27-.95.66-1.28 1.14-.33.48-.54 1.03-.63 1.61-.09.58-.07 1.17.06 1.75.13.58.35 1.13.65 1.64.3.51.67.98 1.09 1.4-.41.06-.83.06-1.25 0-1.05-.16-2.03-.65-2.78-1.41-.75-.76-1.24-1.74-1.43-2.81-.19-1.07-.07-2.18.35-3.19.42-1.01 1.15-1.88 2.09-2.44 1.1-.65 2.36-.93 3.61-.79 1.25.14 2.4.65 3.34 1.47.94.82 1.55 1.92 1.81 3.13.26 1.21.18 2.44-.24 3.61-.42 1.17-1.12 2.23-2.09 2.99z"
+      />
+    </svg>
+  </button>
 </div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const rednoteShareButtons = document.querySelectorAll('[data-aw-social-share="rednote"]');
+    
+    rednoteShareButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const url = button.getAttribute('data-aw-url') || window.location.href;
+        const text = button.getAttribute('data-aw-text') || document.title;
+        
+        // 复制链接到剪贴板
+        navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+          // 打开小红书网页版
+          window.open('https://www.xiaohongshu.com/explore', '_blank');
+          alert('链接已复制到剪贴板，请在小红书页面中粘贴分享');
+        }).catch(() => {
+          alert('复制失败，请手动复制链接');
+        });
+      });
+    });
+  });
+</script>
