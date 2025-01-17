@@ -71,7 +71,13 @@ export const adaptOpenGraphImages = async (
           };
         }
 
-        let _image;
+        interface OptimizedImage {
+          src: string;
+          width: number;
+          height?: number;
+        }
+
+        let _image: OptimizedImage = { src: '', width: 0 };
 
         if (
           typeof resolvedImage === 'string' &&
