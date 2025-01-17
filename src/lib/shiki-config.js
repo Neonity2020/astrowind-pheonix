@@ -7,7 +7,7 @@ export const shikiConfig = {
   transformers: [
     {
       name: 'line-numbers',
-      options: { showLineNumbers: true }
-    }
-  ]
-}; 
+      options: { showLineNumbers: true },
+    },
+  ],
+};
