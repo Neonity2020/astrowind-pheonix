@@ -306,9 +306,9 @@ export async function findCategories() {
       categories.add(post.data.category);
     }
   });
-  return Array.from(categories).map(category => ({
+  return Array.from(categories).map((category) => ({
     slug: cleanSlug(category),
-    title: category
+    title: category,
   }));
 }
 
@@ -318,8 +318,8 @@ export async function findTags() {
   posts.map((post) => {
     post.data.tags?.map((tag) => tags.add(tag));
   });
-  return Array.from(tags).map(tag => ({
+  return Array.from(tags).map((tag) => ({
     slug: cleanSlug(tag),
-    title: tag
+    title: tag,
   }));
 }

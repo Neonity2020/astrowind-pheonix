@@ -5,7 +5,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
-import PostTags from "~/components/blog/Tags.astro";
+import PostTags from '~/components/blog/Tags.astro';
 
 import { blogListRobots, getStaticPathsBlogList, findCategories, findTags } from '~/utils/blog';
 
@@ -44,9 +44,8 @@ const metadata = {
     </Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    
+
     <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
-    <PostTags tags={allTags}  title="Search by Tags:" />
-   
+    <PostTags tags={allTags} title="Search by Tags:" />
   </section>
 </Layout>
