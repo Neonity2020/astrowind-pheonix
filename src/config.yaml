@@ -1,5 +1,5 @@
 site:
-  name: 认知凤凰社 | Phoenix Blog
+  name: 认知凤凰社 | Pheonix
   site: 'https://pheonix-blog.netlify.app'
   base: '/'
   trailingSlash: false
