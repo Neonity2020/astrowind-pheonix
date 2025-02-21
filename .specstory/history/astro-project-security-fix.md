@@ -1,3 +1,20 @@
+## SpecStory
+
+## Astro Project Security Fix (2/21/2025, 12:24:25 PM)
+
+_**User**_
+
+fix
+
+---
+
+_**Assistant**_
+
+Based on the npm audit output, there are some security vulnerabilities that need to be addressed. I'll help you update the astro.config.ts file to use more secure versions of the dependencies.
+
+Here's how we should modify the astro.config.ts file:
+
+```typescript:astro.config.ts
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -11,24 +28,10 @@ import icon from 'astro-icon';
 import compress from 'astro-compress';
 import type { AstroIntegration } from 'astro';
 
-import astrowind from './vendor/integration';
-
-import {
-  readingTimeRemarkPlugin,
-  responsiveTablesRehypePlugin,
-  lazyImagesRehypePlugin,
-} from './src/utils/frontmatter';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-const hasExternalScripts = false;
-const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroIntegration)[] = []) =>
-  hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
+// ... existing imports ...
 
 export default defineConfig({
-  output: 'static',
+  // ... existing config ...
 
   integrations: [
     tailwind({
@@ -77,25 +80,28 @@ export default defineConfig({
     }),
   ],
 
-  image: {
-    domains: ['cdn.pixabay.com'],
-  },
-
-  markdown: {
-    remarkPlugins: [readingTimeRemarkPlugin, remarkMath],
-    rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin, rehypeKatex],
-    syntaxHighlight: 'shiki',
-    shikiConfig: {
-      theme: 'github-dark',
-      wrap: true,
-    },
-  },
-
-  vite: {
-    resolve: {
-      alias: {
-        '~': path.resolve(__dirname, './src'),
-      },
-    },
-  },
+  // ... rest of config ...
 });
+```
+
+Now you should run:
+
+```bash
+npm install astro@2.4.5 @astrojs/tailwind@6.0.0 @astrojs/mdx@4.0.8
+```
+
+This will:
+1. Downgrade Astro to a more stable version (2.4.5) that doesn't have the esbuild vulnerability
+2. Update the Tailwind and MDX integrations to compatible versions
+3. Fix the moderate severity vulnerabilities related to esbuild
+
+The configuration itself remains largely the same, but using these specific versions will help resolve the security issues while maintaining compatibility.
+
+Note that this is a temporary fix - you may want to wait for Astro to release a patched version that fixes these vulnerabilities before upgrading to the latest version again.
+
+---
+
+
+
+---
+

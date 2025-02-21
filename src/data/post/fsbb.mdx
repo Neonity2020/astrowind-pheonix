@@ -1,0 +1,101 @@
+---
+publishDate: 2025-2-21T12:30:18Z
+title: "FSBB：血流敏感黑血成像技术"
+excerpt: 血流敏感黑血成像技术（Flow Sensitive Black Blood）是一种用于血管成像的MRI技术。
+author: Neonity
+image: ~/assets/images/covers/fsbb_cover.webp
+category: mri
+tags:
+  - mri
+  - fsbb
+  - 血流敏感黑血成像技术
+metadata:
+  canonical: https://phoenix.zeabur.app/fsbb
+---
+import { Image } from "astro:assets";
+import fsbb_cover from "~/assets/images/covers/fsbb_cover.webp";
+
+<Image src={fsbb_cover} alt="FSBB" />
+
+FSBB是一种用于血管成像的MRI技术。
+
+## 什么是FSBB？
+
+Flow Sensitive Black Blood imaging
+血流敏感黑血成像
+
+
+![](https://secure2.wostatic.cn/static/jVCG9JtUGEXsUuhMoVRdQN/image.png?auth_key=1740114502-oAc7qFMpBLdLtHKd9WjUnc-0-84c6a9131a7557be687d33517626f20d&file_size=1140777)
+
+
+东芝的流动敏感黑血（Flow-Sensitive Black Blood，FSBB）序列通过在T2\*加权序列中施加运动探测梯度（Motion Probing Gradients，MPGs），能够显著提升血管对比度，同时避免了明显的T2\*衰减[1],[2]。
+## Introduction
+飞行时间法（Time of Flight, TOF）是临床应用最广泛的磁共振血管成像（MRA）技术，其优势主要源于简单的操作原理。该技术通过流入增强效应成像：通过对兴趣区进行反复激励使背景组织信号饱和，而自兴趣区外流入的未饱和血液因具有较高的信号强度，从而形成"亮血"图像。然而TOF技术的局限性也源于其简单机制——明亮的血流信号需要依赖快速层流，这使得其对流速缓慢或湍流血流的成像效果受限（如静脉系统成像）。
+
+为观察静脉等流速缓慢的血管结构，研究者常采用对磁敏感差异敏感的T2\*加权序列，因为静脉血中脱氧血红蛋白具有更强的磁敏感性。虽然T2加权成像能显示低速血流血管，但随着T2衰减的加剧，图像质量会显著下降。针对这一缺陷，东芝公司开发的流动敏感黑血（Flow Sensitive Black Blood, FSBB）序列在T2\*加权序列中应用运动探测梯度（MPGs），在有效提升血管对比度的同时，避免了过度T2\*衰减对图像质量的影响[1]\[2]。
+
+## Background
+常规临床磁共振（MR）对比度是通过调节重复时间（TR）和回波时间（TE）来生成具有不同T1和T2加权的图像。T1是纵向弛豫时间，反映磁化矢量沿+z轴方向恢复至平衡状态的过程；T2是横向弛豫时间，反映可观测信号的衰减过程。这两种弛豫时间主要受局部水分子运动的影响，对磁场不均匀性引起的梯度变化不敏感。
+
+在宏观尺度上，磁场不均匀性会导致标准场回波（FE）序列产生净相位变化，并使得化学位移选择性脂肪抑制等操作复杂化。而在微观尺度上，磁场不均匀性会在亚体素水平产生磁化矢量的相位分布，导致净信号衰减（称为T2\*衰减）。与T2衰减不同，T2\*引起的信号损失可通过自旋回波技术恢复，且只能在场回波序列中观察到。
+
+## Susceptibility
+磁场不均匀性源于组织间磁敏感性的差异。
+
+磁敏感性是衡量材料对外加磁场响应效率的指标。当两种不同磁敏感性物质的界面处，磁场会发生畸变，从而导致磁场不均匀性。从宏观层面观察，这种效应最常见于空气-组织交界面，在臂丛神经和鼻窦等区域尤为显著。
+
+当血红蛋白处于氧合状态时表现为抗磁性，不会引起显著的磁场畸变。然而脱氧血红蛋白会转变为顺磁性，从而在亚体素尺度上产生局部磁场畸变，导致相位分布异常。这种体素内部的相位分布最终会引起图像信号整体衰减，即T2_衰减效应。因此，T2_序列对微观磁敏感性差异具有高度敏感性，常用于静脉血、出血灶及铁沉积的成像。但该序列延长回波时间(TE)会导致图像质量显著下降，严重制约了对微小磁敏感性差异的可视化能力。
+
+为突破此局限，东芝FSBB序列采用弱运动探测梯度技术，通过磁化敏感效应实现对极低速血流的检测。
+## Motion Probing Gradients
+在扩散加权成像（DWI）中，双极梯度被用于使磁化对分子运动敏感。所探测的空间尺度通常通过b值进行量化表征，其关系如下：
+
+$$
+b = γ^2 G^2 δ^2 (Δ - δ/3)
+$$
+
+其中，γ表示旋磁比，G为梯度脉冲的幅值，δ代表梯度脉冲的持续时间，△指代成对梯度脉冲之间的时间间隔[3]。由于b值与梯度幅值的平方呈正比关系，仅需改变梯度幅值即可精细调节待研究的特征长度尺度。当需要探测分子尺度上的运动时，通常采用高强度梯度场使b值达到1000秒/平方毫米。而对于远大于分子扩散尺度的血管运动，则施加弱得多的梯度场，此时b值介于1-3秒/平方毫米之间。简而言之，研究较小尺度的运动需使用高强度梯度场，而探测较大尺度的运动则需采用弱梯度场。
+
+## Incoherent vs. Coherent Motion
+在描述单个体素内自旋运动的类型时，主要分为两类：体素内相干运动（IVCM）和体素内非相干运动（IVIM）。如**图1**所示，在施加运动探测梯度（MPG）的情况下，运动类型会影响体素的信号强度。
+
+对于体素内相干运动（IVCM），在施加第一个MPG前，血流的自旋已具有相位一致性。当施加第一个MPG时，每个自旋根据其在梯度场中的位置获得空间依赖的相位（如**图1**中不同颜色所示）。由于运动具有相干性，自旋在血管内流动时相位分布仍保持有序排列。当施加第二个MPG时，体素内的自旋会进行相干相位重聚。由于流动导致自旋在MPG作用期间发生了位置移动，它们在不同MPG作用下获得的相位存在差异，从而产生净相位变化。这种相位变化是血流研究中速度编码的基础，因为净相位变化与通过目标体素的相干运动速度成正比。为消除这种流动引起的相位变化，可采用一阶梯度矩归零技术进行补偿。
+
+在IVIM技术中，在施加第一个运动探测梯度脉冲（MPG）前，血流自旋虽然混合在一起，但由于初始相位相同仍保持相干状态。当第一个MPG施加后，每个自旋根据其在梯度场中的空间位置（如不同颜色所示）获得相应的相位编码。由于运动具有非相干特性，不同自旋在第一个MPG作用后发生了空间混合。经过一定时间后，施加反向极性的第二个MPG以试图逆转首个梯度脉冲引起的相位离散。然而由于非相干运动破坏了原有的有序相位分布，第二个MPG仅能实现体素内部分相位重聚。最终结果是体素内部产生自旋相位分布差异，在存在IVIM效应的区域表现为信号强度的衰减。
+
+![](https://secure2.wostatic.cn/static/oA5FRfNjYECSh3GhNxMs4V/image.png?auth_key=1740114588-f5xRGNVSewKqeiq9BkLvXL-0-964a6bcdd5d06fe782c462b5fade1e03&file_size=587563)
+![](https://secure2.wostatic.cn/static/xBcUogTffYfqvNGoTNN3vb/image.png?auth_key=1740114616-q5v37epnyzsDkW7ovPUf7Y-0-f97f81a7110aadc5d9b2fd4137b5e60a&file_size=108479)
+图1 - 体素内相干运动（IVCM，左侧）与体素内不相干运动（IVIM，右侧）在运动探测相位分布（第二行彩色箭头表示）作用下的对比示意图。第三行显示，在IVCM中所有自旋均保持相干运动，当沿x方向施加去相位梯度反向（第四行）时，IVCM所有自旋实现完全相位重聚，信号强度得以完全恢复（附加相位变化）；而IVIM由于运动非相干性导致相位不完全重聚，最终净信号幅度降低。
+
+## FSBB
+东芝公司研发的血流敏感黑血成像技术（Flow Sensitive Black Blood, FSBB）通过在三维场回波序列中施加运动敏感梯度（MPGs），同时利用T2\*磁敏感效应和体素内不相干运动（IVIM）失相位效应生成图像对比。当不施加MPGs时，该序列被称为血流不敏感黑血成像技术（FIBB），此时系统在三个方向均实现完全流动补偿，图像对比仅来源于T2\*效应。**图2**通过对比FIBB与FSBB图像，直观展示了施加MPGs的成像效果。
+![](https://secure2.wostatic.cn/static/epWxFA4iGVSeqz4f37bFzj/image.png?auth_key=1740114631-o6j1nzTXosFDjcJkf1Qgtz-0-adc9f7f021b8fa601cf3839f63416080&file_size=447203)
+图2-分别采用血流不敏感黑血（FIBB）序列（左图）和血流敏感黑血（FSBB）序列（右图）获取的b值为1s/mm²的磁共振原始图像最小密度投影（mIP）。由运动探测梯度（MPGs）引起的对比度差异尤其可见于红色箭头标注的颞后支血管区域，以及蓝色箭头标注的上矢状窦结构。
+
+两组图像采集参数保持一致：重复时间/回波时间（TR/TE）=45/25毫秒，翻转角25°，视野24×18平方厘米，层厚2毫米，采集矩阵512×384重建至1024×768。通过叠加6层切片（总厚度12毫米）生成了最小密度投影图像（mlPs）。左图（FIBB）采用流动补偿技术采集，右图（FSBB）则在施加MPGs（对应b值=1秒/平方毫米）条件下采集。FIBB图像显示标准T2\*加权对比，血管内轻微信号衰减仅由磁敏感效应导致。而FSBB图像在保持相同T2\*加权对比的同时，显著提升了FIBB图像中不可见的低速血流血管显示效果。红色箭头标识的颞叶后部分支低速血流血管在FIBB图像中完全不可见，而在FSBB图像中清晰显示。蓝色箭头标记的上矢状窦区域在FIBB图像中因流动补偿保持信号，但在FSBB图像中因失相位效应完全信号缺失。
+
+## Applications
+由于FSBB技术对磁敏感效应和慢血流血管具有高度敏感性，该技术适用于创伤性脑损伤、中风、出血、神经退行性疾病、多发性硬化症、血管畸形、静脉疾病以及神经囊尾蚴病等多种疾病的研究[4]。此外，由于FSBB能够显示其他序列中难以观察到的血管结构，因此它也可用于辅助评估肿瘤的特征和分级。
+
+![](https://secure2.wostatic.cn/static/9fNKp46nryKCpPGGxnPeq/image.png?auth_key=1740114679-4zaRWxiHtxGMdR3k4KCuJb-0-23d9e85985d9df07a66881d99836fe4c&file_size=309183)
+图3-胶质瘤患者影像学研究，展示T2加权像、T1加权像、灌注成像、FIBB以及FSBB的两个不同切面图像。红色箭头指示一条为肿瘤供血的异常血管，该血管在标准FIBB图像中无法显影。
+
+**图3**展示了一名脑胶质瘤患者的影像学研究结果。尽管在T2加权成像和对比增强后T1加权成像中均可观察到肿瘤病灶，但图像并未显示肿瘤周围血管系统的相关信息。灌注加权成像（PWI）和FIBB图像中均可见肿瘤内部存在显著低信号区，提示出血灶。FSBB图像中显示的血管增生现象与PWI图像中肿瘤周围信号强度增强的表现相一致。
+
+其他研究发现，FSBB序列在显示豆纹动脉（lenticulostriate arteries, LSAs）方面具有重要价值。豆纹动脉负责为基底节区及其邻近区域供血[5]。虽然在7T场强下可通过时间飞跃法（TOF）技术轻松显示这些血管，但FSBB序列的优势在于能够在临床常用的1.5T和3T场强下实现豆纹动脉的可视化。该技术提升豆纹动脉显像能力的特点，使其在老年患者中风风险评估方面具有潜在临床应用价值[6]。
+
+## Conclusion
+东芝公司开发的血流敏感黑血（FSBB）序列基于T2\*加权场回波序列的磁敏感对比机制，通过施加运动探测梯度(MPGs)在低速血流血管中产生额外的信号去相位效应。其他厂商提供的后处理技术通常采用磁敏感加权相位蒙版增强T2\*图像的血管对比度，但由于其本质属于后处理方法，原始图像仍受限于长回波时间(TE)条件下T2\*加权成像固有的信噪比限制。此外，长TE带来的图像质量下降问题，以及磁敏感加权相位蒙版需通过滤波补偿背景磁场不均匀性等因素，均制约了传统技术的应用。FSBB序列通过应用MPGs技术，能够在较短TE条件下实现低速血管的对比度增强，同时保持成像质量。由于MPGs产生的血管对比信息可直接在未经处理的幅值图像中显现，FSBB序列的图像处理流程更为简洁。该技术对于研究创伤性脑损伤、脑卒中、出血灶、神经退行性疾病、多发性硬化、血管畸形、静脉系统疾病、脑囊虫病及脑肿瘤等领域的神经放射学检查方案具有重要应用价值。
+## References
+
+[1] T.Kimura, M.Ikedo,N.Furudate,andS.Takemoto, "Flow-Sensitive Susceptibility Weighted Imaging presented at the International Society for Magnetic Resonance in Medicine, 2007,p.3015.
+
+[2]K. Tsuchiya, H.Tateishi, M.Yoshida, M.Amagami, K.Honya,T.Nitatori,T.Kimura,M.Ikedo,and S. Takemoto,"Flow-sensitive Susceptibility-weighted Imaging of the Brain: Initial Experience in Ischemic Lesions," presented at the International Society for Magnetic Resonance in Medicine, 2007, p.3016.
+
+[3]D.Le Bihan and E.Breton,“Imagerie de diffusion in-vivo par resonance magnetique nucleaire,"Comptes-Rendus Academie Sci.,vol.93,pp.27-34,1985.
+
+[4]S.Mittal,Z.Wu,J.Neelavali,andE..Haacke, "Susceptibility Weighted Imaging: Technical Aspects and Clinical Applications,"Am. J. Neuroradiol., vol. 30, pp.332-352,2009.
+
+[5]K.Gotoh,T. Okada,Y.Miki, M.Ikedo,A.Ninomiya, T. Kamae, and K. Togashi, "Visualization of the Lenticulostriate Artery With Flow-Sensitive Black Blood Acquisitionin Comparison with Time-of-Flight MR Angiography,"J.Magn.Reson.Imaging,vol.29,pp.65-69,2009.
+
+[6]S.Okuchi,T.Okada,M.Ihara,K.Gotoh,A.Kido K.Fujimoto,A.Yamamoto,M.Kanagaki,S.Tanaka, R.Takahashi,and K.Togashi, "Visualization of Lenticulostriate Arteries by Flow-SensitiveBlack-Blood MR Angiography on a 1.5T MRI System: A Comparative Study between Subjects with and without Stroke,”Am.J.Neuroradiol.,vol.34,pp.780-784,2012.
