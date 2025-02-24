@@ -14,8 +14,10 @@ metadata:
 ---
 import { Image } from "astro:assets";
 import fsbb_cover from "~/assets/images/covers/fsbb_cover.webp";
-
-<Image src={fsbb_cover} alt="FSBB" />
+import IVCM_vs_IVIM from "~/assets/images/fsbb/IVCM_vs_IVIM.jpg";
+import IVCM_vs_IVIM_caption from "~/assets/images/fsbb/IVCM_vs_IVIM_caption.jpg";
+import figure2 from "~/assets/images/fsbb/figure-2_fsbb.jpg";
+import figure3 from "~/assets/images/fsbb/figure-3_fsbb.jpg";
 
 FSBB是一种用于血管成像的MRI技术。
 
@@ -24,9 +26,7 @@ FSBB是一种用于血管成像的MRI技术。
 Flow Sensitive Black Blood imaging
 血流敏感黑血成像
 
-
-![](https://secure2.wostatic.cn/static/jVCG9JtUGEXsUuhMoVRdQN/image.png?auth_key=1740114502-oAc7qFMpBLdLtHKd9WjUnc-0-84c6a9131a7557be687d33517626f20d&file_size=1140777)
-
+<Image src={fsbb_cover} alt="FSBB" />
 
 东芝的流动敏感黑血（Flow-Sensitive Black Blood，FSBB）序列通过在T2\*加权序列中施加运动探测梯度（Motion Probing Gradients，MPGs），能够显著提升血管对比度，同时避免了明显的T2\*衰减[1],[2]。
 ## Introduction
@@ -44,7 +44,7 @@ Flow Sensitive Black Blood imaging
 
 磁敏感性是衡量材料对外加磁场响应效率的指标。当两种不同磁敏感性物质的界面处，磁场会发生畸变，从而导致磁场不均匀性。从宏观层面观察，这种效应最常见于空气-组织交界面，在臂丛神经和鼻窦等区域尤为显著。
 
-当血红蛋白处于氧合状态时表现为抗磁性，不会引起显著的磁场畸变。然而脱氧血红蛋白会转变为顺磁性，从而在亚体素尺度上产生局部磁场畸变，导致相位分布异常。这种体素内部的相位分布最终会引起图像信号整体衰减，即T2_衰减效应。因此，T2_序列对微观磁敏感性差异具有高度敏感性，常用于静脉血、出血灶及铁沉积的成像。但该序列延长回波时间(TE)会导致图像质量显著下降，严重制约了对微小磁敏感性差异的可视化能力。
+当血红蛋白处于氧合状态时表现为抗磁性，不会引起显著的磁场畸变。然而脱氧血红蛋白会转变为顺磁性，从而在亚体素尺度上产生局部磁场畸变，导致相位分布异常。这种体素内部的相位分布最终会引起图像信号整体衰减，即T2\*衰减效应。因此，T2\*序列对微观磁敏感性差异具有高度敏感性，常用于静脉血、出血灶及铁沉积的成像。但该序列延长回波时间(TE)会导致图像质量显著下降，严重制约了对微小磁敏感性差异的可视化能力。
 
 为突破此局限，东芝FSBB序列采用弱运动探测梯度技术，通过磁化敏感效应实现对极低速血流的检测。
 ## Motion Probing Gradients
@@ -63,13 +63,15 @@ $$
 
 在IVIM技术中，在施加第一个运动探测梯度脉冲（MPG）前，血流自旋虽然混合在一起，但由于初始相位相同仍保持相干状态。当第一个MPG施加后，每个自旋根据其在梯度场中的空间位置（如不同颜色所示）获得相应的相位编码。由于运动具有非相干特性，不同自旋在第一个MPG作用后发生了空间混合。经过一定时间后，施加反向极性的第二个MPG以试图逆转首个梯度脉冲引起的相位离散。然而由于非相干运动破坏了原有的有序相位分布，第二个MPG仅能实现体素内部分相位重聚。最终结果是体素内部产生自旋相位分布差异，在存在IVIM效应的区域表现为信号强度的衰减。
 
-![](https://secure2.wostatic.cn/static/oA5FRfNjYECSh3GhNxMs4V/image.png?auth_key=1740114588-f5xRGNVSewKqeiq9BkLvXL-0-964a6bcdd5d06fe782c462b5fade1e03&file_size=587563)
-![](https://secure2.wostatic.cn/static/xBcUogTffYfqvNGoTNN3vb/image.png?auth_key=1740114616-q5v37epnyzsDkW7ovPUf7Y-0-f97f81a7110aadc5d9b2fd4137b5e60a&file_size=108479)
+
+<Image src={IVCM_vs_IVIM} alt="IVCM_vs_IVIM.jpg" />
+
+<Image src={IVCM_vs_IVIM_caption} alt="IVCM_vs_IVIM_caption.jpg" />
 图1 - 体素内相干运动（IVCM，左侧）与体素内不相干运动（IVIM，右侧）在运动探测相位分布（第二行彩色箭头表示）作用下的对比示意图。第三行显示，在IVCM中所有自旋均保持相干运动，当沿x方向施加去相位梯度反向（第四行）时，IVCM所有自旋实现完全相位重聚，信号强度得以完全恢复（附加相位变化）；而IVIM由于运动非相干性导致相位不完全重聚，最终净信号幅度降低。
 
 ## FSBB
 东芝公司研发的血流敏感黑血成像技术（Flow Sensitive Black Blood, FSBB）通过在三维场回波序列中施加运动敏感梯度（MPGs），同时利用T2\*磁敏感效应和体素内不相干运动（IVIM）失相位效应生成图像对比。当不施加MPGs时，该序列被称为血流不敏感黑血成像技术（FIBB），此时系统在三个方向均实现完全流动补偿，图像对比仅来源于T2\*效应。**图2**通过对比FIBB与FSBB图像，直观展示了施加MPGs的成像效果。
-![](https://secure2.wostatic.cn/static/epWxFA4iGVSeqz4f37bFzj/image.png?auth_key=1740114631-o6j1nzTXosFDjcJkf1Qgtz-0-adc9f7f021b8fa601cf3839f63416080&file_size=447203)
+<Image src={figure2} alt="figure-2_fsbb.jpg" />
 图2-分别采用血流不敏感黑血（FIBB）序列（左图）和血流敏感黑血（FSBB）序列（右图）获取的b值为1s/mm²的磁共振原始图像最小密度投影（mIP）。由运动探测梯度（MPGs）引起的对比度差异尤其可见于红色箭头标注的颞后支血管区域，以及蓝色箭头标注的上矢状窦结构。
 
 两组图像采集参数保持一致：重复时间/回波时间（TR/TE）=45/25毫秒，翻转角25°，视野24×18平方厘米，层厚2毫米，采集矩阵512×384重建至1024×768。通过叠加6层切片（总厚度12毫米）生成了最小密度投影图像（mlPs）。左图（FIBB）采用流动补偿技术采集，右图（FSBB）则在施加MPGs（对应b值=1秒/平方毫米）条件下采集。FIBB图像显示标准T2\*加权对比，血管内轻微信号衰减仅由磁敏感效应导致。而FSBB图像在保持相同T2\*加权对比的同时，显著提升了FIBB图像中不可见的低速血流血管显示效果。红色箭头标识的颞叶后部分支低速血流血管在FIBB图像中完全不可见，而在FSBB图像中清晰显示。蓝色箭头标记的上矢状窦区域在FIBB图像中因流动补偿保持信号，但在FSBB图像中因失相位效应完全信号缺失。
@@ -77,7 +79,7 @@ $$
 ## Applications
 由于FSBB技术对磁敏感效应和慢血流血管具有高度敏感性，该技术适用于创伤性脑损伤、中风、出血、神经退行性疾病、多发性硬化症、血管畸形、静脉疾病以及神经囊尾蚴病等多种疾病的研究[4]。此外，由于FSBB能够显示其他序列中难以观察到的血管结构，因此它也可用于辅助评估肿瘤的特征和分级。
 
-![](https://secure2.wostatic.cn/static/9fNKp46nryKCpPGGxnPeq/image.png?auth_key=1740114679-4zaRWxiHtxGMdR3k4KCuJb-0-23d9e85985d9df07a66881d99836fe4c&file_size=309183)
+<Image src={figure3} alt="figure-3_fsbb.jpg" />
 图3-胶质瘤患者影像学研究，展示T2加权像、T1加权像、灌注成像、FIBB以及FSBB的两个不同切面图像。红色箭头指示一条为肿瘤供血的异常血管，该血管在标准FIBB图像中无法显影。
 
 **图3**展示了一名脑胶质瘤患者的影像学研究结果。尽管在T2加权成像和对比增强后T1加权成像中均可观察到肿瘤病灶，但图像并未显示肿瘤周围血管系统的相关信息。灌注加权成像（PWI）和FIBB图像中均可见肿瘤内部存在显著低信号区，提示出血灶。FSBB图像中显示的血管增生现象与PWI图像中肿瘤周围信号强度增强的表现相一致。
